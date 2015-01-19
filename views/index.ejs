@@ -2,13 +2,37 @@
 <html>
 <head>
 	<title><%= title %></title>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
     
 	<!-- 'Ubuntu' from Google fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+	
+	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-	<h1><%= title %></h1>
-	<p>Welcome to <%= title %></p>
+	<div id="left-panel">
+		<h1><%= title %></h1>
+		<h3>by Viraj Chitnis</h3>
+	</div>
+	<div id="right-panel">
+		<div class="container-fluid">
+			<div class="panel panel-default team-panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Faculty Affairs</h3>
+				</div>
+				<div class="panel-body">
+					John Curran, Brandon Bobo, Nicole Maalouf & Viraj Chitnis
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
