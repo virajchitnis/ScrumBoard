@@ -3,21 +3,15 @@
 	font-family: 'Ubuntu', 'HelveticaNeue-Thin', 'Helvetica Neue Thin', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	line-height: 1.5;
 }
-#left-panel {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 50%;
-	height: 100%;
+body {
+	max-width: 21.59cm;
+	margin: 0 auto !important;
+	float: none !important;
+}
+#top-panel {
 	text-align: center;
 }
-#right-panel {
-	position: fixed;
-	top: 0;
-	left: 50%;
-	width: 50%;
-	height: 100%;
-	border-left: 1px solid #ccc;
+#main-panel {
 }
 .team-panel {
 	margin-top: 10px;
