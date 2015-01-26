@@ -4,19 +4,7 @@
 	line-height: 1.5;
 }
 body {
-	max-width: 21.59cm;
+	max-width: 22cm;
 	margin: 0 auto !important;
 	float: none !important;
-}
-#top-panel {
-	text-align: center;
-}
-#main-panel-body {
-	text-align: center;
-}
-.team-panel {
-	margin-top: 10px;
-}
-.edit-button {
-	float: right;
 }
