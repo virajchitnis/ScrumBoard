@@ -1,1 +1,5 @@
-
+.edit-button {
+	position: absolute;
+	top: 9px;
+	right: 24px;
+}
