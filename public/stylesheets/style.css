@@ -8,3 +8,13 @@ body {
 	margin: 0 auto !important;
 	float: none !important;
 }
+#beta-tag {
+	position: absolute;
+	top: -12px;
+	left: -25px;
+	background-color: yellow;
+	transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	border-bottom: 0.5px solid #ddd;
+}
