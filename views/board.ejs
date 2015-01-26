@@ -8,9 +8,6 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
     
 	<!-- 'Ubuntu' from Google fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
@@ -20,7 +17,7 @@
 </head>
 <body>
 	<div style="border-bottom: 1px solid #ccc;">
-		<h2 style="margin-left: 5px; margin-right: 5px;">Faculty Affairs<button style="float: right;" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
+		<h2 style="margin-left: 5px; margin-right: 5px;">Faculty Affairs<button style="float: right;" class="btn btn-default" type="submit" data-toggle="modal" data-target="#new-item-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>
 	<div>
 		<div style="border-bottom: 1px solid #ccc;">
@@ -67,5 +64,115 @@
 			<h4 style="text-align: center;">Sprint 3</h4>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="new-item-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Add an item</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="itemSection">Project section</label>
+							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name">
+						</div>
+						<div class="form-group">
+							<label for="itemDetails">Item details</label>
+							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="itemAssignee">Assignee</label>
+							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;">
+						</div>
+						<div class="form-group">
+							<label for="itemSprintNum">Item color</label>
+							<select class="form-control" id="itemSprintNum">
+								<option value="backlog">Backlog</option>
+								<option value="1">Sprint 1</option>
+								<option value="2">Sprint 2</option>
+								<option value="3">Sprint 3</option>
+								<option value="complete">Complete</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="itemColor">Item color</label>
+							<select class="form-control" id="itemColor">
+								<option value="blue">Blue</option>
+								<option value="red">Red</option>
+								<option value="pink">Pink</option>
+								<option value="yellow">Yellow</option>
+								<option value="purple">Purple</option>
+								<option value="orange">Orange</option>
+								<option value="green">Green</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="edit-item-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Edit item</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="itemSection">Project section</label>
+							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name" value="UI">
+						</div>
+						<div class="form-group">
+							<label for="itemDetails">Item details</label>
+							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;">Add captcha to the forms.</textarea>
+						</div>
+						<div class="form-group">
+							<label for="itemAssignee">Assignee</label>
+							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;" value="Viraj Chitnis">
+						</div>
+						<div class="form-group">
+							<label for="itemSprintNum">Item color</label>
+							<select class="form-control" id="itemSprintNum">
+								<option value="backlog">Backlog</option>
+								<option value="1" selected>Sprint 1</option>
+								<option value="2">Sprint 2</option>
+								<option value="3">Sprint 3</option>
+								<option value="complete">Complete</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="itemColor">Item color</label>
+							<select class="form-control" id="itemColor">
+								<option value="blue" selected>Blue</option>
+								<option value="red">Red</option>
+								<option value="pink">Pink</option>
+								<option value="yellow">Yellow</option>
+								<option value="purple">Purple</option>
+								<option value="orange">Orange</option>
+								<option value="green">Green</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
