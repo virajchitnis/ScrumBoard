@@ -38,7 +38,7 @@
 		<div class="container-fluid">
 			<div class="panel panel-default team-panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Faculty Affairs <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span></h3>
+					<h3 class="panel-title">Faculty Affairs <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-team-modal"></span></h3>
 				</div>
 				<div class="panel-body">
 					John Curran, Brandon Bobo, Nicole Maalouf & Viraj Chitnis
@@ -46,6 +46,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="modal fade" id="new-team-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -71,6 +72,42 @@
 							<label for="teamSecret">Team secret</label>
 							<p>The secret is some text that a team should decide upon, this text will serve as a sort of password. Only the team and the instructor should know this secret. When a user chooses to open a team's scrum board, they will be asked to enter the secret. Only if the secret entered matches the secret for that particular team, will the scrum board be opened.</p>
 							<input type="password" class="form-control" id="teamSecret" placeholder="Enter secret">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="edit-team-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Edit Faculty Affairs</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="teamName">Team name</label>
+							<input type="text" class="form-control" id="teamName" placeholder="Enter name" value="Faculty Affairs">
+						</div>
+						<div class="form-group">
+							<label for="teamMembers">Team members</label>
+							<textarea class="form-control" rows="3" id="teamMembers" placeholder="Enter team member names">John Curran, Brandon Bobo, Nicole Maalouf & Viraj Chitnis</textarea>
+						</div>
+						<div class="form-group">
+							<label for="teamDescription">Project description</label>
+							<textarea class="form-control" rows="3" id="teamDescription" placeholder="Describe the team's project&hellip;">Database system for the Faculty Affairs Office at Temple University.</textarea>
+						</div>
+						<div class="form-group">
+							<label for="teamSecret">Team secret</label>
+							<p>The secret is some text that a team should decide upon, this text will serve as a sort of password. Only the team and the instructor should know this secret. When a user chooses to open a team's scrum board, they will be asked to enter the secret. Only if the secret entered matches the secret for that particular team, will the scrum board be opened.</p>
+							<input type="password" class="form-control" id="teamSecret" placeholder="Enter secret" value="xyzxyzxyz">
 						</div>
 					</form>
 				</div>
