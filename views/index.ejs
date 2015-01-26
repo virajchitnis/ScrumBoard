@@ -42,7 +42,8 @@
 					<h3 class="panel-title">Faculty Affairs <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-team-modal"></span></h3>
 				</div>
 				<div class="panel-body">
-					John Curran, Brandon Bobo, Nicole Maalouf & Viraj Chitnis
+					<p>Database system for the Faculty Affairs Office at Temple University.</p>
+					<small>John Curran, Brandon Bobo, Nicole Maalouf & Viraj Chitnis</small>
 				</div>
 			</div>
 		</div>
@@ -73,6 +74,32 @@
 							<label for="teamSecret">Team secret</label>
 							<p>The secret is some text that a team should decide upon, this text will serve as a sort of password. Only the team and the instructor should know this secret. When a user chooses to open a team's scrum board, they will be asked to enter the secret. Only if the secret entered matches the secret for that particular team, will the scrum board be opened.</p>
 							<input type="password" class="form-control" id="teamSecret" placeholder="Enter secret">
+						</div>
+						<div class="form-group">
+							<label for="teamBacklog">Tasks backlog</label>
+							<p>Check the box below if you need to have a row on your scrum board which can be used for keeping track of tasks that are yet to be completed and have not yet been assigned to any sprint.</p>
+							<input type="checkbox" id="teamBacklog"> Tasks backlog
+						</div>
+						<div class="form-group">
+							<label for="teamCompleted">Completed tasks</label>
+							<p>Check the box below if you need to have a row on your scrum board which can be used for keeping track of completed tasks.</p>
+							<input type="checkbox" id="teamCompleted"> Completed tasks
+						</div>
+						<div class="form-group">
+							<label for="teamSprintNums">Number of sprints</label>
+							<p>The number of sprints that will be used by your team. This setting can be changed later from the scrum board settings if needed.</p>
+							<select class="form-control" id="teamSprintNums">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+							</select>
 						</div>
 					</form>
 				</div>
@@ -106,9 +133,36 @@
 							<textarea class="form-control" rows="3" id="teamDescription" placeholder="Describe the team's project&hellip;">Database system for the Faculty Affairs Office at Temple University.</textarea>
 						</div>
 						<div class="form-group">
-							<label for="teamSecret">Team secret</label>
+							<label for="teamOldSecret">Team secret</label>
 							<p>The secret is some text that a team should decide upon, this text will serve as a sort of password. Only the team and the instructor should know this secret. When a user chooses to open a team's scrum board, they will be asked to enter the secret. Only if the secret entered matches the secret for that particular team, will the scrum board be opened.</p>
-							<input type="password" class="form-control" id="teamSecret" placeholder="Enter secret" value="xyzxyzxyz">
+							<p><input type="password" class="form-control" id="teamOldSecret" placeholder="Old secret"></p>
+							<p><input type="password" class="form-control" id="teamSecret" placeholder="New secret"></p>
+						</div>
+						<div class="form-group">
+							<label for="teamBacklog">Tasks backlog</label>
+							<p>Check the box below if you need to have a row on your scrum board which can be used for keeping track of tasks that are yet to be completed and have not yet been assigned to any sprint.</p>
+							<input type="checkbox" id="teamBacklog" checked> Tasks backlog
+						</div>
+						<div class="form-group">
+							<label for="teamCompleted">Completed tasks</label>
+							<p>Check the box below if you need to have a row on your scrum board which can be used for keeping track of completed tasks.</p>
+							<input type="checkbox" id="teamCompleted"> Completed tasks
+						</div>
+						<div class="form-group">
+							<label for="teamSprintNums">Number of sprints</label>
+							<p>The number of sprints that will be used by your team. This setting can be changed later from the scrum board settings if needed.</p>
+							<select class="form-control" id="teamSprintNums">
+								<option>1</option>
+								<option>2</option>
+								<option selected>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+							</select>
 						</div>
 					</form>
 				</div>
