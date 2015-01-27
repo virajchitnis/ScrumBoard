@@ -3,6 +3,7 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Team = require('../models/Team.js');
+var Task = require('../models/Task.js');
 
 /* GET all teams. */
 router.get('/', function(req, res, next) {
@@ -43,31 +44,50 @@ router.get('/', function(req, res, next) {
 
 /* POST (add) a new team */
 router.post('/teams', function(req, res, next) {
-  var team = new Team(req.body);
+	var team = new Team(req.body);
 
-  team.save(function(err, team){
-    if(err){ return next(err); }
+	team.save(function(err, team){
+		if(err){ return next(err); }
 
-    res.json(team);
-  });
+		res.json(team);
+	});
 });
 
 /* PARAM (method) for retrieving a team by its id */
 router.param('team', function(req, res, next, id) {
-  var query = Team.findById(id);
+	var query = Team.findById(id);
 
-  query.exec(function (err, team){
-    if (err) { return next(err); }
-    if (!team) { return next(new Error("can't find team")); }
+	query.exec(function (err, team){
+		if (err) { return next(err); }
+		if (!team) { return next(new Error("can't find team")); }
 
-    req.team = team;
-    return next();
-  });
+		req.team = team;
+		return next();
+	});
 });
 
 /* GET a particular team by its id */
 router.get('/teams/:team', function(req, res) {
-  res.json(req.team);
+	req.team.populate('scrumTasks', function(err, task) {
+		res.json(req.team);
+	});
+});
+
+/* POST (add) a new task */
+router.post('/teams/:team/tasks', function(req, res, next) {
+	var task = new Task(req.body);
+	task.team = req.team;
+
+	task.save(function(err, task){
+		if(err){ return next(err); }
+
+		req.team.scrumTasks.push(task);
+		req.team.save(function(err, team) {
+			if(err){ return next(err); }
+
+			res.json(task);
+		});
+	});
 });
 
 module.exports = router;

@@ -5,7 +5,8 @@ var TaskSchema = new mongoose.Schema({
 	details: String,
 	assignee: String,
 	sprint: String,
-	color: String
+	color: String,
+	textColor: String,
 	team: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Team'
