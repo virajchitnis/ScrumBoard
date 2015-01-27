@@ -39,7 +39,7 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 		// Add new team to MongoDB database.
 		
 		var textColor = "black";
-		if (($scope.itemColor == "blue") || ($scope.itemColor == "red") || ($scope.itemColor == "purple")) {
+		if (($scope.itemColor == "blue") || ($scope.itemColor == "red") || ($scope.itemColor == "purple") || ($scope.itemColor == "green")) {
 			textColor = "white";
 		}
 		
@@ -67,5 +67,20 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 				// or server returns response with an error status.
 			});
 		}
+	};
+	
+	$scope.getNumber = function(num) {
+		var ret = new Array(num);
+		for (var i = 0; i < num; i++) {
+			ret[i] = i+1;
+		}
+		return ret;
+	};
+	
+	$scope.filterSprints = function(num) {
+		var ret = {
+			sprint: num
+		};
+		return ret;
 	};
 }]);

@@ -43,14 +43,22 @@
 				</div>
 			</div>
 		</div>
-		<div style="border-bottom: 1px solid #ccc;">
-			<h4 style="text-align: center;">Sprint 1</h4>
-		</div>
-		<div style="border-bottom: 1px solid #ccc;">
-			<h4 style="text-align: center;">Sprint 2</h4>
-		</div>
-		<div style="border-bottom: 1px solid #ccc;">
-			<h4 style="text-align: center;">Sprint 3</h4>
+		<div style="border-bottom: 1px solid #ccc;" ng-repeat="sprintNumber in getNumber(team.sprints)">
+			<h4 style="text-align: center;">Sprint {{sprintNumber}}</h4>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterSprints(sprintNumber)">
+						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
+							<div class="panel-body">
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-item-modal"></span>
+								<h3>{{task.section}}</h3>
+								<p>{{task.details}}</p>
+								<h4 style="text-align: right;">{{task.assignee}}</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div style="border-bottom: 1px solid #ccc;">
 			<h4 style="text-align: center;">Completed</h4>
