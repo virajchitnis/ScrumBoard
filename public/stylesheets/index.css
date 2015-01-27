@@ -9,4 +9,8 @@
 }
 .edit-button {
 	float: right;
+	cursor: pointer;
+}
+.link-button {
+	cursor: pointer;
 }

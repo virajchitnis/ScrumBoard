@@ -49,6 +49,6 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 	
 	$scope.openTeamBoard = function(id) {
 		// Use this function to open the board and pass the selected team's id.
-		console.log(id);
+		window.location = "./board?team=" + id;
 	};
 }]);
