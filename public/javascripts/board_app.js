@@ -1,6 +1,13 @@
 var app = angular.module('app', []);
 
 app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+	$scope.filterBacklog = {
+		sprint: "backlog"
+	};
+	$scope.filterCompleted = {
+		sprint: "complete"
+	};
+	
 	function getURLParameter(sParam) {
 		var sPageURL = window.location.search.substring(1);
 		var sURLVariables = sPageURL.split('&');
