@@ -17,4 +17,5 @@ body {
 	-ms-transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
 	border-bottom: 0.5px solid #ddd;
+	cursor: pointer;
 }

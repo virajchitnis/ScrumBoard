@@ -175,7 +175,26 @@
 		</div>
 	</div>
 	
-	<div id="beta-tag"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+	<div class="modal fade" id="about-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">About</h4>
+				</div>
+				<div class="modal-body">
+					<h4>Scrum Board <small>beta1</small></h4>
+					<p><small>Copyright &copy; 2014 Viraj Chitnis</small></p>
+					<p>For any feature requests or bug reports, please email me at <a href="mailto:chitnisviraj@gmail.com">chitnisviraj@gmail.com</a></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="beta-tag" data-toggle="modal" data-target="#about-modal"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
