@@ -1,6 +1,6 @@
 {
-  "name": "scrumboard",
-  "version": "0.0.0",
+  "name": "ScrumBoard",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -11,6 +11,7 @@
     "debug": "~2.1.1",
     "ejs": "~2.1.4",
     "express": "~4.11.0",
+    "mongoose": "^3.8.22",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
   }
