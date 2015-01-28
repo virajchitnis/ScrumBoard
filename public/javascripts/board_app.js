@@ -105,6 +105,24 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		}
 	};
 	
+	$scope.taskDeleted = function() {
+		// Delete existing task.
+		
+		$http.delete('./data/teams/' + teamID + '/tasks/' + $scope.itemId).
+		success(function(data, status, headers, config) {
+			$('#edit-item-modal').modal('hide');
+			resetNewTaskForm();
+	
+			$http.get('../data/teams/' + teamID).success(function(data) {
+				$scope.team = data;
+			});
+		}).
+		error(function(data, status, headers, config) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+		});
+	};
+	
 	$scope.openEditModal = function(indexOfSelectedTask) {
 		var selectedTask = $scope.team.scrumTasks[indexOfSelectedTask];
 		

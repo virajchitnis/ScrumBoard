@@ -114,4 +114,20 @@ router.put('/teams/:team/tasks/:task', function(req, res, next) {
 	});
 });
 
+/* DELETE a particular task by its id */
+router.delete('/teams/:team/tasks/:task', function(req, res, next) {
+	var urlSections = req.url.split('/');
+	
+	Task.findByIdAndRemove(urlSections[4], req.body, function (err, post) {
+		if (err) return next(err);
+		
+		req.team.scrumTasks.pull(urlSections[4]);
+		req.team.save(function(err, team) {
+			if(err){ return next(err); }
+
+			res.json(post);
+		});
+	});
+});
+
 module.exports = router;
