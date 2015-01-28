@@ -85,18 +85,21 @@
 					<form>
 						<div class="form-group">
 							<label for="itemSection">Project section</label>
+							<p>What section of the project is this task part of? E.g. 'UI'</p>
 							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name" ng-model="itemSection">
 						</div>
 						<div class="form-group">
-							<label for="itemDetails">Item details</label>
-							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;" ng-model="itemDetails"></textarea>
+							<label for="itemDetails">Task details</label>
+							<p>If you want to format the details properly, you can use HTML.</p>
+							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter task details (description)&hellip;" ng-model="itemDetails"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="itemAssignee">Assignee</label>
-							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;" ng-model="itemAssignee">
+							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this task is assigned to&hellip;" ng-model="itemAssignee">
 						</div>
 						<div class="form-group">
-							<label for="itemSprintNum">Item sprint</label>
+							<label for="itemSprintNum">Sprint</label>
+							<p>What sprint is this task part of? Tasks can be moved between sprints if and when necessary.</p>
 							<select class="form-control" id="itemSprint" ng-model="itemSprint">
 								<option value="backlog" ng-if="team.backlog">Backlog</option>
 								<option value="{{sprintNumber}}" ng-repeat="sprintNumber in getNumber(team.sprints)">Sprint {{sprintNumber}}</option>
@@ -104,7 +107,8 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="itemColor">Item color</label>
+							<label for="itemColor">Task color</label>
+							<p>The background color of the task, this is used to color code tasks.</p>
 							<select class="form-control" id="itemColor" ng-model="itemColor">
 								<option value="blue">Blue</option>
 								<option value="red">Red</option>
@@ -136,18 +140,21 @@
 					<form>
 						<div class="form-group">
 							<label for="itemSection">Project section</label>
+							<p>What section of the project is this task part of? E.g. 'UI'</p>
 							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name" ng-model="itemSection">
 						</div>
 						<div class="form-group">
-							<label for="itemDetails">Item details</label>
-							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;" ng-model="itemDetails"></textarea>
+							<label for="itemDetails">Task details</label>
+							<p>If you want to format the details properly, you can use HTML.</p>
+							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter task details (description)&hellip;" ng-model="itemDetails"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="itemAssignee">Assignee</label>
-							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;" ng-model="itemAssignee">
+							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this task is assigned to&hellip;" ng-model="itemAssignee">
 						</div>
 						<div class="form-group">
-							<label for="itemSprintNum">Item sprint</label>
+							<label for="itemSprintNum">Sprint</label>
+							<p>What sprint is this task part of? Tasks can be moved between sprints if and when necessary.</p>
 							<select class="form-control" id="itemSprint" ng-model="itemSprint">
 								<option value="backlog" ng-if="team.backlog">Backlog</option>
 								<option value="{{sprintNumber}}" ng-repeat="sprintNumber in getNumber(team.sprints)">Sprint {{sprintNumber}}</option>
@@ -155,7 +162,8 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="itemColor">Item color</label>
+							<label for="itemColor">Task color</label>
+							<p>The background color of the task, this is used to color code tasks.</p>
 							<select class="form-control" id="itemColor" ng-model="itemColor">
 								<option value="blue">Blue</option>
 								<option value="red">Red</option>
