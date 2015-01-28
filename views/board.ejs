@@ -22,6 +22,7 @@
 	<script src="/javascripts/board_app.js"></script>
 </head>
 <body ng-app="app" ng-controller="MainCtrl">
+	<input type="hidden" id="teamID" value="<%= teamID %>">
 	<div style="border-bottom: 1px solid #ccc;">
 		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>

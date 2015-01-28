@@ -30,7 +30,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 	
 	resetNewTaskForm();
 	
-	var teamID = getURLParameter('team');
+	var teamID = $("#teamID").val();
 	
 	$http.get('../data/teams/' + teamID).success(function(data) {
 		$scope.team = data;
@@ -108,7 +108,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 	$scope.taskDeleted = function() {
 		// Delete existing task.
 		
-		$http.delete('./data/teams/' + teamID + '/tasks/' + $scope.itemId).
+		$http.delete('../data/teams/' + teamID + '/tasks/' + $scope.itemId).
 		success(function(data, status, headers, config) {
 			$('#edit-item-modal').modal('hide');
 			resetNewTaskForm();
