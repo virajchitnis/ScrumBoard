@@ -2,6 +2,7 @@ var app = angular.module('app', []);
 
 app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 	function resetTeamForm() {
+		$scope.teamId = "";
 		$scope.teamName = "";
 		$scope.teamMembers = "";
 		$scope.teamDescription = "";
@@ -78,6 +79,24 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		}
 	};
 	
+	$scope.teamDeleted = function() {
+		// Delete existing team.
+		
+		$http.delete('./data/teams/' + $scope.teamId).
+		success(function(data, status, headers, config) {
+			$('#edit-team-modal').modal('hide');
+			resetTeamForm();
+	
+			$http.get('./data').success(function(data) {
+				$scope.teams = data;
+			});
+		}).
+		error(function(data, status, headers, config) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+		});
+	};
+	
 	$scope.openEditModal = function(indexOfSelectedTeam) {
 		var selectedTeam = $scope.teams[indexOfSelectedTeam];
 		
@@ -91,6 +110,11 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		$scope.teamSprints = selectedTeam.sprints;
 		
 		$('#edit-team-modal').modal('show');
+	};
+	
+	$scope.openNewModal = function() {
+		resetTeamForm();
+		$('#new-team-modal').modal('show');
 	};
 	
 	$scope.openTeamBoard = function(id) {

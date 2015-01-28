@@ -31,7 +31,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body" id="main-panel-body">
 				<form class="form-inline">
-					<a class="btn btn-default" href="#" data-toggle="modal" data-target="#new-team-modal" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+					<a class="btn btn-default" href="#" role="button" ng-click="openNewModal()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 					<div class="form-group">
 						<div class="input-group">
 							<input type="search" class="form-control" id="searchTeams" placeholder="Search teams" ng-model="searchTeams.name">
@@ -173,6 +173,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" ng-click="teamDeleted()">Delete {{teamName}}</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" ng-click="editModalClosed()">Done</button>
 				</div>

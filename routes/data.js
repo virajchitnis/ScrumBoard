@@ -81,6 +81,14 @@ router.put('/teams/:team', function(req, res, next) {
 	});
 });
 
+/* DELETE a particular team by its id */
+router.delete('/teams/:team', function(req, res, next) {
+	Team.findByIdAndRemove(req.team.id, req.body, function (err, post) {
+		if (err) return next(err);
+		res.json(post);
+	});
+});
+
 /* POST (add) a new task */
 router.post('/teams/:team/tasks', function(req, res, next) {
 	var task = new Task(req.body);
