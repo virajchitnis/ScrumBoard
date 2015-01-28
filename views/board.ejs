@@ -23,7 +23,7 @@
 </head>
 <body ng-app="app" ng-controller="MainCtrl">
 	<div style="border-bottom: 1px solid #ccc;">
-		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" data-toggle="modal" data-target="#new-item-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
+		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>
 	<div>
 		<div style="border-bottom: 1px solid #ccc;">
@@ -33,7 +33,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterBacklog">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-item-modal"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -50,7 +50,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterSprints(sprintNumber)">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-item-modal"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -67,7 +67,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterCompleted">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-item-modal"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -84,7 +84,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Add an item</h4>
+					<h4 class="modal-title">Add a task</h4>
 				</div>
 				<div class="modal-body">
 					<form>
@@ -137,27 +137,27 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Edit item</h4>
+					<h4 class="modal-title">Edit task</h4>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
 							<label for="itemSection">Project section</label>
-							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name" value="UI">
+							<input type="text" class="form-control" id="itemSection" placeholder="Enter section name" ng-model="itemSection">
 						</div>
 						<div class="form-group">
 							<label for="itemDetails">Item details</label>
-							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;">Add captcha to the forms.</textarea>
+							<textarea class="form-control" rows="3" id="itemDetails" placeholder="Enter item details (description)&hellip;" ng-model="itemDetails"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="itemAssignee">Assignee</label>
-							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;" value="Viraj Chitnis">
+							<input type="text" class="form-control" id="itemAssignee" placeholder="Enter the name of the person who this item is assigned to&hellip;" ng-model="itemAssignee">
 						</div>
 						<div class="form-group">
-							<label for="itemSprintNum">Item color</label>
-							<select class="form-control" id="itemSprintNum">
+							<label for="itemSprintNum">Item sprint</label>
+							<select class="form-control" id="itemSprint" ng-model="itemSprint">
 								<option value="backlog">Backlog</option>
-								<option value="1" selected>Sprint 1</option>
+								<option value="1">Sprint 1</option>
 								<option value="2">Sprint 2</option>
 								<option value="3">Sprint 3</option>
 								<option value="complete">Complete</option>
@@ -165,8 +165,8 @@
 						</div>
 						<div class="form-group">
 							<label for="itemColor">Item color</label>
-							<select class="form-control" id="itemColor">
-								<option value="blue" selected>Blue</option>
+							<select class="form-control" id="itemColor" ng-model="itemColor">
+								<option value="blue">Blue</option>
 								<option value="red">Red</option>
 								<option value="pink">Pink</option>
 								<option value="yellow">Yellow</option>
@@ -179,7 +179,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary">Done</button>
+					<button type="button" class="btn btn-primary" ng-click="editModalClosed()">Done</button>
 				</div>
 			</div>
 		</div>

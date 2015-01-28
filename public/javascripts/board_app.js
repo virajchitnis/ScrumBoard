@@ -20,6 +20,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 	}
 	
 	function resetNewTaskForm() {
+		$scope.itemId = "";
 		$scope.itemSection = "";
 		$scope.itemDetails = "";
 		$scope.itemAssignee = "";
@@ -67,6 +68,59 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 				// or server returns response with an error status.
 			});
 		}
+	};
+	
+	$scope.editModalClosed = function() {
+		// Edit existing task.
+		
+		var textColor = "black";
+		if (($scope.itemColor == "blue") || ($scope.itemColor == "red") || ($scope.itemColor == "purple") || ($scope.itemColor == "green")) {
+			textColor = "white";
+		}
+		
+		if (($scope.itemSection != "") && ($scope.itemDetails != "") && ($scope.itemAssignee != "")) {
+			var Task = {
+				id: $scope.itemId,
+				section: $scope.itemSection,
+				details: $scope.itemDetails,
+				assignee: $scope.itemAssignee,
+				sprint: $scope.itemSprint,
+				color: $scope.itemColor,
+				textColor: textColor
+			};
+		
+			$http.put('../data/teams/' + teamID + '/tasks/' + $scope.itemId, Task).
+			success(function(data, status, headers, config) {
+				$('#edit-item-modal').modal('hide');
+				resetNewTaskForm();
+		
+				$http.get('../data/teams/' + teamID).success(function(data) {
+					$scope.team = data;
+				});
+			}).
+			error(function(data, status, headers, config) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+			});
+		}
+	};
+	
+	$scope.openEditModal = function(indexOfSelectedTask) {
+		var selectedTask = $scope.team.scrumTasks[indexOfSelectedTask];
+		
+		$scope.itemId = selectedTask._id;
+		$scope.itemSection = selectedTask.section;
+		$scope.itemDetails = selectedTask.details;
+		$scope.itemAssignee = selectedTask.assignee;
+		$scope.itemSprint = selectedTask.sprint;
+		$scope.itemColor = selectedTask.color;
+		
+		$('#edit-item-modal').modal('show');
+	};
+	
+	$scope.openNewModal = function() {
+		resetNewTaskForm();
+		$('#new-item-modal').modal('show');
 	};
 	
 	$scope.getNumber = function(num) {

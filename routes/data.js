@@ -106,4 +106,12 @@ router.post('/teams/:team/tasks', function(req, res, next) {
 	});
 });
 
+/* PUT (update) a particular task by its id */
+router.put('/teams/:team/tasks/:task', function(req, res, next) {
+	Task.findByIdAndUpdate(req.body.id, req.body, function (err, post) {
+		if (err) return next(err);
+		res.json(post);
+	});
+});
+
 module.exports = router;
