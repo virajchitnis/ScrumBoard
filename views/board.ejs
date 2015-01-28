@@ -26,7 +26,7 @@
 		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>
 	<div>
-		<div style="border-bottom: 1px solid #ccc;">
+		<div style="border-bottom: 1px solid #ccc;" ng-if="team.backlog">
 			<h4 style="text-align: center;">Backlog</h4>
 			<div class="container-fluid">
 				<div class="row">
@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		<div style="border-bottom: 1px solid #ccc;">
+		<div style="border-bottom: 1px solid #ccc;" ng-if="team.completed">
 			<h4 style="text-align: center;">Completed</h4>
 			<div class="container-fluid">
 				<div class="row">
@@ -103,11 +103,9 @@
 						<div class="form-group">
 							<label for="itemSprintNum">Item sprint</label>
 							<select class="form-control" id="itemSprint" ng-model="itemSprint">
-								<option value="backlog">Backlog</option>
-								<option value="1">Sprint 1</option>
-								<option value="2">Sprint 2</option>
-								<option value="3">Sprint 3</option>
-								<option value="complete">Complete</option>
+								<option value="backlog" ng-if="team.backlog">Backlog</option>
+								<option value="{{sprintNumber}}" ng-repeat="sprintNumber in getNumber(team.sprints)">Sprint {{sprintNumber}}</option>
+								<option value="complete" ng-if="team.completed">Complete</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -156,11 +154,9 @@
 						<div class="form-group">
 							<label for="itemSprintNum">Item sprint</label>
 							<select class="form-control" id="itemSprint" ng-model="itemSprint">
-								<option value="backlog">Backlog</option>
-								<option value="1">Sprint 1</option>
-								<option value="2">Sprint 2</option>
-								<option value="3">Sprint 3</option>
-								<option value="complete">Complete</option>
+								<option value="backlog" ng-if="team.backlog">Backlog</option>
+								<option value="{{sprintNumber}}" ng-repeat="sprintNumber in getNumber(team.sprints)">Sprint {{sprintNumber}}</option>
+								<option value="complete" ng-if="team.completed">Complete</option>
 							</select>
 						</div>
 						<div class="form-group">
