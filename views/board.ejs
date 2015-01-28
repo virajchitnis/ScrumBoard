@@ -24,7 +24,7 @@
 <body ng-app="app" ng-controller="MainCtrl">
 	<input type="hidden" id="teamID" value="<%= teamID %>">
 	<div style="border-bottom: 1px solid #ccc;">
-		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
+		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-style="displayLogin" data-toggle="modal" data-target="#login-modal">Login</button><button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()" ng-style="displayControls"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>
 	<div>
 		<div style="border-bottom: 1px solid #ccc;" ng-if="team.backlog">
@@ -34,7 +34,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterBacklog">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -51,7 +51,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterSprints(sprintNumber)">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -68,7 +68,7 @@
 					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterCompleted">
 						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
 							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))"></span>
+								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
 								<h3>{{task.section}}</h3>
 								<p ng-bind-html="getAsHTML(task.details)"></p>
 								<h4 style="text-align: right;">{{task.assignee}}</h4>
@@ -178,6 +178,28 @@
 					<button type="button" class="btn btn-danger" ng-click="taskDeleted()">Delete this task</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" ng-click="editModalClosed()">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="login-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Login</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="teamSecret">Secret</label>
+						<input type="password" class="form-control" id="teamSecret" placeholder="Enter your team secret" ng-model="teamSecret">
+					</div>
+					<p style="color: red;" ng-style="displayPasswordError">{{passwordErrorMsg}}</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" ng-click="loginModalClosed()">Login</button>
 				</div>
 			</div>
 		</div>

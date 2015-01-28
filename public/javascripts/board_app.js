@@ -1,6 +1,10 @@
 var app = angular.module('app', []);
 
 app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+	$scope.displayControls = { display: 'none' };
+	$scope.displayLogin = { display: 'block' };
+	$scope.displayPasswordError = { display: 'none' };
+	
 	$scope.filterBacklog = {
 		sprint: "backlog"
 	};
@@ -139,6 +143,21 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 	$scope.openNewModal = function() {
 		resetNewTaskForm();
 		$('#new-item-modal').modal('show');
+	};
+	
+	$scope.loginModalClosed = function() {
+		if ($scope.teamSecret == $scope.team.secret) {
+			$('#login-modal').modal('hide');
+			
+			$scope.displayControls = { display: 'block' };
+			$scope.displayLogin = { display: 'none' };
+			$scope.passwordErrorMsg = "";
+			$scope.displayPasswordError = { display: 'none' };
+		}
+		else {
+			$scope.passwordErrorMsg = "Incorrect secret, try again";
+			$scope.displayPasswordError = { display: 'block' };
+		}
 	};
 	
 	$scope.getNumber = function(num) {
