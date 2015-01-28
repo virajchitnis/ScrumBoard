@@ -142,7 +142,9 @@
 						<div class="form-group">
 							<label for="teamSecret">Team secret</label>
 							<p>The secret is some text that a team should decide upon, this text will serve as a sort of password. Only the team and the instructor should know this secret. When a user chooses to open a team's scrum board, they will be asked to enter the secret. Only if the secret entered matches the secret for that particular team, will the scrum board be opened.</p>
-							<input type="password" class="form-control" placeholder="Enter secret" ng-model="teamSecret">
+							<input type="password" class="form-control" placeholder="Enter old secret" ng-model="teamOldSecret">
+							<input type="password" class="form-control" placeholder="Enter new secret" ng-model="teamNewSecret" style="margin-top: 5px;">
+							<p style="color: red;" ng-style="displaySecretError"><b>{{secretError}}</b></p>
 						</div>
 						<div class="form-group">
 							<label for="teamBacklog">Tasks backlog</label>
