@@ -1,7 +1,7 @@
 var app = angular.module('app', []);
 
 app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
-	function resetNewTeamForm() {
+	function resetTeamForm() {
 		$scope.teamName = "";
 		$scope.teamMembers = "";
 		$scope.teamDescription = "";
@@ -11,7 +11,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		$scope.teamSprints = 3;
 	}
 	
-	resetNewTeamForm();
+	resetTeamForm();
 	
 	$http.get('./data').success(function(data) {
 		$scope.teams = data;
@@ -34,7 +34,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 			$http.post('./data/teams', Team).
 			success(function(data, status, headers, config) {
 				$('#new-team-modal').modal('hide');
-				resetNewTeamForm();
+				resetTeamForm();
 		
 				$http.get('./data').success(function(data) {
 					$scope.teams = data;
@@ -45,6 +45,52 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 				// or server returns response with an error status.
 			});
 		}
+	};
+	
+	$scope.editModalClosed = function() {
+		// Update existing team.
+		
+		if (($scope.teamName != "") && ($scope.teamMembers != "") && ($scope.teamDescription != "") && ($scope.teamSecret != "")) {
+			var Team = {
+				id: $scope.teamId,
+				name: $scope.teamName,
+				members: $scope.teamMembers,
+				description: $scope.teamDescription,
+				secret: $scope.teamSecret,
+				backlog: $scope.teamBacklog,
+				completed: $scope.teamCompleted,
+				sprints: $scope.teamSprints
+			};
+		
+			$http.put('./data/teams/' + $scope.teamId, Team).
+			success(function(data, status, headers, config) {
+				$('#edit-team-modal').modal('hide');
+				resetTeamForm();
+		
+				$http.get('./data').success(function(data) {
+					$scope.teams = data;
+				});
+			}).
+			error(function(data, status, headers, config) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+			});
+		}
+	};
+	
+	$scope.openEditModal = function(indexOfSelectedTeam) {
+		var selectedTeam = $scope.teams[indexOfSelectedTeam];
+		
+		$scope.teamId = selectedTeam._id;
+		$scope.teamName = selectedTeam.name;
+		$scope.teamMembers = selectedTeam.members;
+		$scope.teamDescription = selectedTeam.description;
+		$scope.teamSecret = selectedTeam.secret;
+		$scope.teamBacklog = selectedTeam.backlog;
+		$scope.teamCompleted = selectedTeam.completed;
+		$scope.teamSprints = selectedTeam.sprints;
+		
+		$('#edit-team-modal').modal('show');
 	};
 	
 	$scope.openTeamBoard = function(id) {

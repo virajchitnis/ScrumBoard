@@ -73,6 +73,14 @@ router.get('/teams/:team', function(req, res) {
 	});
 });
 
+/* PUT (update) a particular team by its id */
+router.put('/teams/:team', function(req, res, next) {
+	Team.findByIdAndUpdate(req.team.id, req.body, function (err, post) {
+		if (err) return next(err);
+		res.json(post);
+	});
+});
+
 /* POST (add) a new task */
 router.post('/teams/:team/tasks', function(req, res, next) {
 	var task = new Task(req.body);
