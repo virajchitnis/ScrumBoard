@@ -21,7 +21,7 @@
 	<!-- App logic controller -->
 	<script src="/javascripts/board_app.js"></script>
 </head>
-<body ng-app="app" ng-controller="MainCtrl">
+<body class="container" ng-app="app" ng-controller="MainCtrl">
 	<input type="hidden" id="teamID" value="<%= teamID %>">
 	<div style="border-bottom: 1px solid #ccc;">
 		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-style="displayLogin" data-toggle="modal" data-target="#login-modal">Login</button><button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()" ng-style="displayControls"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
@@ -30,15 +30,13 @@
 		<div style="border-bottom: 1px solid #ccc;" ng-if="team.backlog">
 			<h4 style="text-align: center;">Backlog</h4>
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterBacklog">
-						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
-							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
-								<h3>{{task.section}}</h3>
-								<p ng-bind-html="getAsHTML(task.details)"></p>
-								<h4 style="text-align: right;">{{task.assignee}}</h4>
-							</div>
+				<div style="display: inline-block; max-width: 6cm; margin: 5px;" ng-repeat="task in team.scrumTasks | filter:filterBacklog">
+					<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
+						<div class="panel-body" style="position: relative;">
+							<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
+							<h3>{{task.section}}</h3>
+							<p ng-bind-html="getAsHTML(task.details)"></p>
+							<h4 style="text-align: right;">{{task.assignee}}</h4>
 						</div>
 					</div>
 				</div>
@@ -47,15 +45,13 @@
 		<div style="border-bottom: 1px solid #ccc;" ng-repeat="sprintNumber in getNumber(team.sprints)">
 			<h4 style="text-align: center;">Sprint {{sprintNumber}}</h4>
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterSprints(sprintNumber)">
-						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
-							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
-								<h3>{{task.section}}</h3>
-								<p ng-bind-html="getAsHTML(task.details)"></p>
-								<h4 style="text-align: right;">{{task.assignee}}</h4>
-							</div>
+				<div style="display: inline-block; max-width: 6cm; margin: 5px;" ng-repeat="task in team.scrumTasks | filter:filterSprints(sprintNumber)">
+					<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
+						<div class="panel-body" style="position: relative;">
+							<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
+							<h3>{{task.section}}</h3>
+							<p ng-bind-html="getAsHTML(task.details)"></p>
+							<h4 style="text-align: right;">{{task.assignee}}</h4>
 						</div>
 					</div>
 				</div>
@@ -64,15 +60,13 @@
 		<div style="border-bottom: 1px solid #ccc;" ng-if="team.completed">
 			<h4 style="text-align: center;">Completed</h4>
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-3" ng-repeat="task in team.scrumTasks | filter:filterCompleted">
-						<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
-							<div class="panel-body">
-								<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
-								<h3>{{task.section}}</h3>
-								<p ng-bind-html="getAsHTML(task.details)"></p>
-								<h4 style="text-align: right;">{{task.assignee}}</h4>
-							</div>
+				<div style="display: inline-block; max-width: 6cm; margin: 5px;" ng-repeat="task in team.scrumTasks | filter:filterCompleted">
+					<div class="panel panel-default" style="background-color: {{task.color}}; color: {{task.textColor}};">
+						<div class="panel-body" style="position: relative;">
+							<span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(team.scrumTasks.indexOf(task))" ng-style="displayControls"></span>
+							<h3>{{task.section}}</h3>
+							<p ng-bind-html="getAsHTML(task.details)"></p>
+							<h4 style="text-align: right;">{{task.assignee}}</h4>
 						</div>
 					</div>
 				</div>
