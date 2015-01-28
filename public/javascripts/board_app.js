@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 	$scope.filterBacklog = {
 		sprint: "backlog"
 	};
@@ -83,4 +83,8 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 		};
 		return ret;
 	};
+	
+	$scope.getAsHTML = function(html) {
+		return $sce.trustAsHtml(html);
+	}
 }]);
