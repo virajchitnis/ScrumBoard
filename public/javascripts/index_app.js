@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 	function resetNewTeamForm() {
 		$scope.teamName = "";
 		$scope.teamMembers = "";
@@ -51,4 +51,8 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
 		// Use this function to open the board and pass the selected team's id.
 		window.location = "./board?team=" + id;
 	};
+	
+	$scope.getAsHTML = function(html) {
+		return $sce.trustAsHtml(html);
+	}
 }]);

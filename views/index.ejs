@@ -44,12 +44,12 @@
 	</div>
 	<div id="main-panel">
 		<div class="container-fluid">
-			<div class="panel panel-default team-panel" ng-repeat="team in teams | filter:searchTeams">
+			<div class="panel panel-default team-panel" ng-repeat="team in teams | filter:searchTeams | orderBy:'name'">
 				<div class="panel-heading">
 					<h3 class="panel-title"><span class="glyphicon glyphicon-link link-button" aria-hidden="true" ng-click="openTeamBoard(team._id)"></span> {{team.name}} <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" data-toggle="modal" data-target="#edit-team-modal"></span></h3>
 				</div>
 				<div class="panel-body">
-					<p>{{team.description}}</p>
+					<p ng-bind-html="getAsHTML(team.description)"></p>
 					<small>{{team.members}}</small>
 				</div>
 			</div>
