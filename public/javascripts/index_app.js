@@ -101,19 +101,28 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 	$scope.teamDeleted = function() {
 		// Delete existing team.
 		
-		$http.delete('./data/teams/' + $scope.teamId).
-		success(function(data, status, headers, config) {
-			$('#edit-team-modal').modal('hide');
-			resetTeamForm();
+		if ($scope.teamOldSecret == $scope.teamSecret) {
+			$http.delete('./data/teams/' + $scope.teamId).
+			success(function(data, status, headers, config) {
+				$('#edit-team-modal').modal('hide');
+				resetTeamForm();
 	
-			$http.get('./data').success(function(data) {
-				$scope.teams = data;
+				$http.get('./data').success(function(data) {
+					$scope.teams = data;
+				});
+			}).
+			error(function(data, status, headers, config) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
 			});
-		}).
-		error(function(data, status, headers, config) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-		});
+		}
+		else {
+			if ($scope.teamOldSecret == "")
+				$scope.secretError = "Please enter the team secret, you can only delete a team if you enter the correct team secret.";
+			else
+				$scope.secretError = "Incorrect secret, please try again!";
+			$scope.displaySecretError = { display: 'block' };
+		}
 	};
 	
 	$scope.openEditModal = function(indexOfSelectedTeam) {
