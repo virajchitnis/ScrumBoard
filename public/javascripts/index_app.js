@@ -28,15 +28,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 	resetTeamForm();
 	reloadAllTeams();
 	
-	$socket.on('team.created', function (data) {
-		reloadAllTeams();
-	});
-	
-	$socket.on('team.edited', function (data) {
-		reloadAllTeams();
-	});
-	
-	$socket.on('team.deleted', function (data) {
+	$socket.on('teams.modified', function (data) {
 		reloadAllTeams();
 	});
 	

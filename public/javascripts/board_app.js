@@ -1,6 +1,9 @@
-var app = angular.module('app', []);
-
-app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+var app = angular.module('app', ['socket.io']);
+app.config(['$socketProvider', function ($socketProvider) {
+	$socketProvider.setConnectionUrl('http://localhost:3001');
+	$socketProvider.setTryMultipleTransports(false);
+}]);
+app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scope, $http, $sce, $socket) {
 	$scope.displayControls = { display: 'none' };
 	$scope.displayLogin = { display: 'block' };
 	$scope.displayPasswordError = { display: 'none' };
@@ -32,12 +35,20 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		$scope.itemColor = "blue";
 	}
 	
+	function reloadTeam(id) {
+		$http.get('../data/teams/' + id).success(function(data) {
+			$scope.team = data;
+		});
+	}
+	
 	resetNewTaskForm();
 	
 	var teamID = $("#teamID").val();
 	
-	$http.get('../data/teams/' + teamID).success(function(data) {
-		$scope.team = data;
+	reloadTeam(teamID);
+	
+	$socket.on('tasks.modified', function (data) {
+		reloadTeam(teamID);
 	});
 	
 	$scope.addModalClosed = function() {
@@ -62,10 +73,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 			success(function(data, status, headers, config) {
 				$('#new-item-modal').modal('hide');
 				resetNewTaskForm();
-		
-				$http.get('../data/teams/' + teamID).success(function(data) {
-					$scope.team = data;
-				});
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -97,10 +104,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 			success(function(data, status, headers, config) {
 				$('#edit-item-modal').modal('hide');
 				resetNewTaskForm();
-		
-				$http.get('../data/teams/' + teamID).success(function(data) {
-					$scope.team = data;
-				});
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -116,10 +119,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		success(function(data, status, headers, config) {
 			$('#edit-item-modal').modal('hide');
 			resetNewTaskForm();
-	
-			$http.get('../data/teams/' + teamID).success(function(data) {
-				$scope.team = data;
-			});
 		}).
 		error(function(data, status, headers, config) {
 			// called asynchronously if an error occurs

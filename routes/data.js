@@ -21,7 +21,7 @@ router.post('/teams', function(req, res, next) {
 		if(err){ return next(err); }
 
 		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-		socketio.sockets.emit('team.created', team); // emit an event for all connected clients
+		socketio.sockets.emit('teams.modified', team); // emit an event for all connected clients
 
 		res.json(team);
 	});
@@ -53,7 +53,7 @@ router.put('/teams/:team', function(req, res, next) {
 		if (err) return next(err);
 		
 		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-		socketio.sockets.emit('team.edited', team); // emit an event for all connected clients
+		socketio.sockets.emit('teams.modified', team); // emit an event for all connected clients
 		
 		res.json(team);
 	});
@@ -65,7 +65,7 @@ router.delete('/teams/:team', function(req, res, next) {
 		if (err) return next(err);
 		
 		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-		socketio.sockets.emit('team.deleted', team); // emit an event for all connected clients
+		socketio.sockets.emit('teams.modified', team); // emit an event for all connected clients
 		
 		res.json(team);
 	});
@@ -82,6 +82,9 @@ router.post('/teams/:team/tasks', function(req, res, next) {
 		req.team.scrumTasks.push(task);
 		req.team.save(function(err, team) {
 			if(err){ return next(err); }
+			
+			var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+			socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
 
 			res.json(task);
 		});
@@ -90,9 +93,13 @@ router.post('/teams/:team/tasks', function(req, res, next) {
 
 /* PUT (update) a particular task by its id */
 router.put('/teams/:team/tasks/:task', function(req, res, next) {
-	Task.findByIdAndUpdate(req.body.id, req.body, function (err, post) {
+	Task.findByIdAndUpdate(req.body.id, req.body, function (err, task) {
 		if (err) return next(err);
-		res.json(post);
+		
+		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+		socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
+		
+		res.json(task);
 	});
 });
 
@@ -100,14 +107,17 @@ router.put('/teams/:team/tasks/:task', function(req, res, next) {
 router.delete('/teams/:team/tasks/:task', function(req, res, next) {
 	var urlSections = req.url.split('/');
 	
-	Task.findByIdAndRemove(urlSections[4], req.body, function (err, post) {
+	Task.findByIdAndRemove(urlSections[4], req.body, function (err, task) {
 		if (err) return next(err);
 		
 		req.team.scrumTasks.pull(urlSections[4]);
 		req.team.save(function(err, team) {
 			if(err){ return next(err); }
+			
+			var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+			socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
 
-			res.json(post);
+			res.json(task);
 		});
 	});
 });
