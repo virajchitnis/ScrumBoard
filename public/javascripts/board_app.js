@@ -115,15 +115,25 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 	$scope.taskDeleted = function() {
 		// Delete existing task.
 		
+		$('#delete-team-modal').modal('show');
+		$('#edit-item-modal').modal('hide');
+	};
+	
+	$scope.taskDeleteConfirmed = function() {
 		$http.delete('../data/teams/' + teamID + '/tasks/' + $scope.itemId).
 		success(function(data, status, headers, config) {
-			$('#edit-item-modal').modal('hide');
+			$('#delete-team-modal').modal('hide');
 			resetNewTaskForm();
 		}).
 		error(function(data, status, headers, config) {
 			// called asynchronously if an error occurs
 			// or server returns response with an error status.
 		});
+	};
+	
+	$scope.taskDeleteCancelled = function() {
+		$('#delete-team-modal').modal('hide');
+		resetNewTaskForm();
 	};
 	
 	$scope.openEditModal = function(indexOfSelectedTask) {
