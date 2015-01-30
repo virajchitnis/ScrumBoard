@@ -1,6 +1,9 @@
-var app = angular.module('app', []);
-
-app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+var app = angular.module('app', ['socket.io']);
+app.config(['$socketProvider', function ($socketProvider) {
+	$socketProvider.setConnectionUrl('http://localhost:3001');
+	$socketProvider.setTryMultipleTransports(false);
+}]);
+app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scope, $http, $sce, $socket) {
 	$scope.displaySecretError = { display: 'none' };
 	
 	function resetTeamForm() {
@@ -16,10 +19,25 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 		$scope.teamSprints = 3;
 	}
 	
-	resetTeamForm();
+	function reloadAllTeams() {
+		$http.get('./data').success(function(data) {
+			$scope.teams = data;
+		});
+	}
 	
-	$http.get('./data').success(function(data) {
-		$scope.teams = data;
+	resetTeamForm();
+	reloadAllTeams();
+	
+	$socket.on('team.created', function (data) {
+		reloadAllTeams();
+	});
+	
+	$socket.on('team.edited', function (data) {
+		reloadAllTeams();
+	});
+	
+	$socket.on('team.deleted', function (data) {
+		reloadAllTeams();
 	});
 	
 	$scope.addModalClosed = function() {
@@ -40,10 +58,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 			success(function(data, status, headers, config) {
 				$('#new-team-modal').modal('hide');
 				resetTeamForm();
-		
-				$http.get('./data').success(function(data) {
-					$scope.teams = data;
-				});
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -78,10 +92,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 					$scope.secretError = "";
 					$scope.displaySecretError = { display: 'none' };
 					resetTeamForm();
-		
-					$http.get('./data').success(function(data) {
-						$scope.teams = data;
-					});
 				}).
 				error(function(data, status, headers, config) {
 					// called asynchronously if an error occurs
@@ -106,10 +116,6 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', function($scope, $http, $
 			success(function(data, status, headers, config) {
 				$('#edit-team-modal').modal('hide');
 				resetTeamForm();
-	
-				$http.get('./data').success(function(data) {
-					$scope.teams = data;
-				});
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs

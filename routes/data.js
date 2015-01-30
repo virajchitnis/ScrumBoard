@@ -20,6 +20,9 @@ router.post('/teams', function(req, res, next) {
 	team.save(function(err, team){
 		if(err){ return next(err); }
 
+		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+		socketio.sockets.emit('team.created', team); // emit an event for all connected clients
+
 		res.json(team);
 	});
 });
@@ -46,17 +49,25 @@ router.get('/teams/:team', function(req, res) {
 
 /* PUT (update) a particular team by its id */
 router.put('/teams/:team', function(req, res, next) {
-	Team.findByIdAndUpdate(req.team.id, req.body, function (err, post) {
+	Team.findByIdAndUpdate(req.team.id, req.body, function (err, team) {
 		if (err) return next(err);
-		res.json(post);
+		
+		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+		socketio.sockets.emit('team.edited', team); // emit an event for all connected clients
+		
+		res.json(team);
 	});
 });
 
 /* DELETE a particular team by its id */
 router.delete('/teams/:team', function(req, res, next) {
-	Team.findByIdAndRemove(req.team.id, req.body, function (err, post) {
+	Team.findByIdAndRemove(req.team.id, req.body, function (err, team) {
 		if (err) return next(err);
-		res.json(post);
+		
+		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
+		socketio.sockets.emit('team.deleted', team); // emit an event for all connected clients
+		
+		res.json(team);
 	});
 });
 
