@@ -104,15 +104,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 		// Delete existing team.
 		
 		if ($scope.teamOldSecret == $scope.teamSecret) {
-			$http.delete('./data/teams/' + $scope.teamId).
-			success(function(data, status, headers, config) {
-				$('#edit-team-modal').modal('hide');
-				resetTeamForm();
-			}).
-			error(function(data, status, headers, config) {
-				// called asynchronously if an error occurs
-				// or server returns response with an error status.
-			});
+			$('#edit-team-modal').modal('hide');
+			$('#delete-team-modal').modal('show');
 		}
 		else {
 			if ($scope.teamOldSecret == "")
@@ -121,6 +114,23 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 				$scope.secretError = "Incorrect secret, please try again!";
 			$scope.displaySecretError = { display: 'block' };
 		}
+	};
+	
+	$scope.teamDeleteConfirmed = function() {
+		$http.delete('./data/teams/' + $scope.teamId).
+		success(function(data, status, headers, config) {
+			$('#delete-team-modal').modal('hide');
+			resetTeamForm();
+		}).
+		error(function(data, status, headers, config) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+		});
+	};
+	
+	$scope.teamDeleteCancelled = function() {
+		$('#delete-team-modal').modal('hide');
+		resetTeamForm();
 	};
 	
 	$scope.openEditModal = function(indexOfSelectedTeam) {
