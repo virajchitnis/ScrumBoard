@@ -21,6 +21,9 @@ var database = require('./routes/data');
 
 var app = express();
 
+var node_modules = require('express-node_modules');
+app.use(node_modules('/lib', require));
+
 var server = http.createServer(app);
 var io = socketio.listen(server);
 app.set('socketio', io);
