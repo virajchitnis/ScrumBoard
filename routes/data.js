@@ -84,7 +84,7 @@ router.post('/teams/:team/tasks', function(req, res, next) {
 			if(err){ return next(err); }
 			
 			var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-			socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
+			socketio.sockets.emit('tasks.modified.' + req.team.id, task); // emit an event for all connected clients
 
 			res.json(task);
 		});
@@ -97,7 +97,7 @@ router.put('/teams/:team/tasks/:task', function(req, res, next) {
 		if (err) return next(err);
 		
 		var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-		socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
+		socketio.sockets.emit('tasks.modified.' + req.team.id, task); // emit an event for all connected clients
 		
 		res.json(task);
 	});
@@ -115,7 +115,7 @@ router.delete('/teams/:team/tasks/:task', function(req, res, next) {
 			if(err){ return next(err); }
 			
 			var socketio = req.app.get('socketio'); // tack out socket instance from the app container
-			socketio.sockets.emit('tasks.modified', task); // emit an event for all connected clients
+			socketio.sockets.emit('tasks.modified.' + req.team.id, task); // emit an event for all connected clients
 
 			res.json(task);
 		});

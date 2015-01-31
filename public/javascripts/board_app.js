@@ -48,7 +48,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 	
 	reloadTeam(teamID);
 	
-	$socket.on('tasks.modified', function (data) {
+	$socket.on('tasks.modified.' + teamID, function (data) {
 		reloadTeam(teamID);
 	});
 	
