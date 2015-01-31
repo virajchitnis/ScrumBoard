@@ -17,4 +17,5 @@ $ npm install
 $ npm start
 ```
 
-Configure nginx to proxy requests to http://localhost:3000/ if you need.
+Visit http://localhost:3000/ to use the application.
+If you want to serve this application on port 80, configure nginx to proxy requests from port 80 to http://localhost:3000/.
