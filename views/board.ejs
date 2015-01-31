@@ -30,6 +30,11 @@
 	<div style="border-bottom: 1px solid #ccc;">
 		<h2 style="margin-left: 5px; margin-right: 5px;">{{team.name}}<button style="float: right;" class="btn btn-default" type="submit" ng-style="displayLogin" data-toggle="modal" data-target="#login-modal">Login</button><button style="float: right;" class="btn btn-default" type="submit" ng-click="openNewModal()" ng-style="displayControls"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h2>
 	</div>
+	<div class="panel panel-default" ng-style="displayJSError">
+		<div class="panel-body">
+			Oh snap! It seems JavaScript is turned off on your browser, please turn it on for this page to function properly.
+		</div>
+	</div>
 	<div>
 		<div style="border-bottom: 1px solid #ccc;" ng-if="team.backlog">
 			<h4 style="text-align: center;">Backlog</h4>

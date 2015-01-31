@@ -5,6 +5,7 @@ app.config(['$socketProvider', function ($socketProvider) {
 }]);
 app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scope, $http, $sce, $socket) {
 	$scope.displaySecretError = { display: 'none' };
+	$scope.displayJSError = { display: 'none' };
 	
 	function resetTeamForm() {
 		$scope.teamId = "";
