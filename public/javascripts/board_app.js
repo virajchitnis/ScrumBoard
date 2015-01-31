@@ -7,6 +7,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$sce', '$socket', function($scop
 	$scope.displayControls = { display: 'none' };
 	$scope.displayLogin = { display: 'block' };
 	$scope.displayPasswordError = { display: 'none' };
+	$scope.displayJSError = { display: 'none' };
 	
 	$scope.filterBacklog = {
 		sprint: "backlog"

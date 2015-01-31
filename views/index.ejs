@@ -48,6 +48,11 @@
 	</div>
 	<div id="main-panel">
 		<div class="container-fluid">
+			<div class="panel panel-default" ng-style="displayJSError">
+				<div class="panel-body">
+					Oh snap! It seems JavaScript is turned off on your browser, please turn it on for this page to function properly.
+				</div>
+			</div>
 			<div class="panel panel-default team-panel" ng-repeat="team in teams | filter:searchTeams | orderBy:'name'">
 				<div class="panel-heading">
 					<h3 class="panel-title"><span class="glyphicon glyphicon-link link-button" aria-hidden="true" ng-click="openTeamBoard(team._id)"></span> {{team.name}} <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true" ng-click="openEditModal(teams.indexOf(team))"></span></h3>
